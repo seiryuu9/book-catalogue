@@ -1,35 +1,25 @@
 <template>
-  <v-app-bar
-    app
-    elevation="2"
-    color="primary"
-  >
-    <!-- Logo / názov appky -->
+  <v-app-bar color="primary" >
+
     <v-app-bar-title class="font-weight-bold">
       BadReads
     </v-app-bar-title>
 
-    <!-- Navigácia -->
-    <v-btn
-      to="/"
-      variant="text"
-      class="mx-1"
-    >
+    <v-btn to="/" variant="text">
       Home
     </v-btn>
 
-    <v-btn
-      to="/books"
-      variant="text"
-      class="mx-1"
-    >
+    <v-btn to="/books" variant="text">
       Books
+    </v-btn>
+
+    <v-btn to="/account" variant="text">
+      Account
     </v-btn>
 
     <v-spacer />
 
-    <!-- Theme toggle -->
-    <v-btn icon @click="toggleTheme" :title="themeLabel">
+    <v-btn icon @click="toggleTheme">
         <v-icon>{{ themeStore.isDark ? 'mdi-weather-sunny' : 'mdi-weather-night' }}</v-icon>
     </v-btn>
 
@@ -46,10 +36,6 @@ export default defineComponent({
   computed: {
     themeStore() {
       return useThemeStore()
-    },
-
-    themeLabel(): string {
-      return this.themeStore.isDark ? 'light' : 'dark'
     },
   },
 
