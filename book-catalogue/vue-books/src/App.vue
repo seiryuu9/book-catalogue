@@ -1,36 +1,26 @@
 <template>
-  <v-theme-provider :theme="themeStore.theme" >
+  <v-theme-provider :theme="themeStore.current">
     <v-app>
       <NavigationBar />
-       <!-- nav bar a router view -->
-      
+      <v-main>
+        <router-view />
+      </v-main>
     </v-app>
   </v-theme-provider>
-  
 </template>
 
-<script>
-import { useThemeStore } from "./stores/theme";
-import NavigationBar from "./components/NavigationBar.vue";
+<script lang="ts">
+import { defineComponent } from 'vue'
+import NavigationBar from './components/NavigationBar.vue'
+import { useThemeStore } from './stores/theme.ts'
 
-export default {
-  name: "App",
-
-  components: {
-    NavigationBar
-  },
-
-  data() {
-    return {
-      themeStore: useThemeStore()  // ukladame store do data
-    };
-  },
-
+export default defineComponent({
+  name: 'App',
+  components: { NavigationBar },
   computed: {
-    theme() {
-      return this.themeStore.theme;
+    themeStore() {
+      return useThemeStore()
     }
   }
-};
+})
 </script>
-
