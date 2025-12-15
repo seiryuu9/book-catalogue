@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import BookView from "../views/BooksView.vue";
 import AccountView from "../views/AccountView.vue";
+import BookDetailView from "../views/BookDetailView.vue";
 
 const routes = [
   {
@@ -14,6 +15,12 @@ const routes = [
     path: "/books",
     name: "books",
     component: BookView,
+  },
+  {
+  path: '/books/:slug',
+  name: 'book-detail',
+  component: BookDetailView,
+  props: true
   },
   {
     path: "/account",
