@@ -1,14 +1,7 @@
 <template>
-  <v-card
-    class="book-card"
-    elevation="3"
-    hover
-  >
-    <v-img
-      :src="book.image"
-      height="400"
-      cover
-    />
+  <v-card class="cursor-pointer" elevation="3" hover>
+
+    <v-img :src="book.image" height="400"cover/>
 
     <v-card-title class="text-center">
       {{ book.title }}
@@ -18,21 +11,19 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+import type { Book } from '../types/books'
 
 export default defineComponent({
   name: 'BookCard',
 
   props: {
     book: {
-      type: Object,
+      type: Object as PropType<Book>,
       required: true,
     },
   },
 })
 </script>
 
-<style scoped>
-.book-card {
-  cursor: pointer;
-}
-</style>
+

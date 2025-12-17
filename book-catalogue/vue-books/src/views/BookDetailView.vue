@@ -31,30 +31,7 @@
 
         <v-divider class="my-6" />
 
-        <h3 class="my-2">Reviews</h3>
-
-        <v-select v-model="selectedRating" :items="ratingOptions" label="Filter by ratings"
-        clearable class="mb-4" density="compact"/> <!-- rozbalovaci filter, items - pole moznosti, vmodel viaze vybrane na data()-->
-
-        <v-card
-        v-for="(review, index) in filteredReviews" :key="index"
-        class="mb-3" variant="outlined">
-
-        <v-card-title class="text-subtitle-2">
-            {{ review.user }}
-        </v-card-title>
-
-        <v-card-text>
-            <v-rating :model-value="review.rating"
-            readonly density="compact"/>
-            <p class="mt-2">{{ review.text }}</p>
-        </v-card-text>
-        </v-card>
-
-        <p v-if="filteredReviews.length === 0">
-        No reviews found.
-        </p>
-
+        <Reviews :reviews="book.reviews" />
 
       </v-col>
     </v-row>
@@ -63,11 +40,17 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import books from '@/data/books.json'
+import books from '../data/books.json'
+import Reviews from '../components/Reviews.vue'
 
 export default defineComponent({
-  name: 'BookDetailView',
+  name: 'BookDetailView', // useful pre debugging
 
+  components: {
+    Reviews,
+  },
+
+  //hodnoty od rodica (z routeru)
   props: {
     slug: {
       type: String,
@@ -75,33 +58,12 @@ export default defineComponent({
     },
   },
 
-  data() {
-    return {
-      selectedRating: null as number | null,
-    }
-  },
-
   computed: {
     book() {
-      return books.find(book => book.slug === this.slug)
+      return books.find(book => book.slug === this.slug) // hlada v jsone, pre v-if v containeri
     },
-
-    ratingOptions(): number[] {
-      return [5, 4, 3, 2, 1]
-    },
-
-    filteredReviews() {
-      if (!this.book) return []
-
-      if (!this.selectedRating) {
-        return this.book.reviews
-      }
-
-      return this.book.reviews.filter(
-        review => review.rating === this.selectedRating
-      )
     },
   },
-})
+)
 </script>
 

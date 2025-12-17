@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="primary" >
+  <v-app-bar color="primary">
 
     <v-app-bar-title class="font-weight-bold">
       BadReads
