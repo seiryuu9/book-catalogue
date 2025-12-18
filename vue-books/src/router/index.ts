@@ -4,12 +4,21 @@ import HomeView from "../views/HomeView.vue";
 import BookView from "../views/BooksView.vue";
 import AccountView from "../views/AccountView.vue";
 import BookDetailView from "../views/BookDetailView.vue";
+import BookDescription from "../components/BookDescription.vue";
 
 const routes = [
   {
     path: "/",
     name: "home",
     component: HomeView,
+    children: [
+        {
+          path: "desc/:slug",
+          name: "book-description",
+          component: BookDescription,
+          props: true,
+        },
+      ],
   },
   {
     path: "/books",

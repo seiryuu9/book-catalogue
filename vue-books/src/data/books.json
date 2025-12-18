@@ -29,6 +29,20 @@
   },
   {
     "id": 3,
+    "title": "If We Were Villains",
+    "slug": "if-we-were-villains",
+    "author": "M.L. Rio",
+    "description": "If We Were Villains is the debut novel of American author M. L. Rio, first published in 2017 by Flatiron Books. The novel concerns a murder mystery surrounding Oliver Marks, a former actor at the fictional Dellecher Shakespeare conservatory and primarily takes place during his fourth and final year at the conservatory.",
+    "image": "/images/villains.jpg",
+    "reviews": [
+        { "user": "Alice", "text": "Best book ever.", "rating": 5 },
+        { "user": "Charlie", "text": "You must give this one a go. Amazing.", "rating": 5 }
+    ],
+    "genre": ["Theatre", "Dark academia", "Detective"],
+    "source": "https://en.wikipedia.org/wiki/If_We_Were_Villains"
+  },
+  {
+    "id": 4,
     "title": "The Secret History",
     "slug": "the-secret-history",
     "author": "Donna Tartt",
@@ -41,20 +55,6 @@
     ],
     "genre": ["Detective", "Dark academia"],
     "source": "https://en.wikipedia.org/wiki/The_Secret_History"
-  },
-  {
-    "id": 4,
-    "title": "If We Were Villains",
-    "slug": "if-we-were-villains",
-    "author": "M.L. Rio",
-    "description": "If We Were Villains is the debut novel of American author M. L. Rio, first published in 2017 by Flatiron Books. The novel concerns a murder mystery surrounding Oliver Marks, a former actor at the fictional Dellecher Shakespeare conservatory and primarily takes place during his fourth and final year at the conservatory.",
-    "image": "/images/villains.jpg",
-    "reviews": [
-        { "user": "Alice", "text": "Best book ever.", "rating": 5 },
-        { "user": "Charlie", "text": "You must give this one a go. Amazing.", "rating": 5 }
-    ],
-    "genre": ["Theatre", "Dark academia", "Detective"],
-    "source": "https://en.wikipedia.org/wiki/If_We_Were_Villains"
   },
   {
     "id": 5,
