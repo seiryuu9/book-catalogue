@@ -1,7 +1,7 @@
 <template>
   <v-app-bar color="primary">
 
-    <v-app-bar-title class="font-weight-bold">
+    <v-app-bar-title to="/" class="font-weight-bold">
       BadReads
     </v-app-bar-title>
 
@@ -41,7 +41,7 @@ export default defineComponent({
 
   methods: {
     toggleTheme(): void {
-      this.themeStore.current = this.themeStore.isDark ? 'light' : 'dark'
+      this.themeStore.toggleTheme()
     },
   },
 })

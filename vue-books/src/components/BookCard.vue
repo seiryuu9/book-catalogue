@@ -12,7 +12,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import type { Book } from '../types/books'
+import type { Book } from '../types/booksTypes'
 
 export default defineComponent({
   name: 'BookCard',

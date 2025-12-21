@@ -23,7 +23,7 @@
 import { defineComponent } from 'vue'
 import BookCard from '../components/BookCard.vue'
 import booksData from '../data/books.json'
-import type { Book } from '../types/books'
+import type { Book } from '../types/booksTypes'
 
 export default defineComponent({
   name: 'BooksView',

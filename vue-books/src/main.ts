@@ -3,7 +3,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import { vuetify } from './plugins/vuetify.ts'
 import router from './router'
-import '@mdi/font/css/materialdesignicons.css'
+import '@mdi/font/css/materialdesignicons.css' // pekne ikonky z mdi, kompatibilne s vuetify
 
 
 const app = createApp(App)

@@ -8,14 +8,14 @@ export const vuetify = createVuetify({
       light: {
         dark: false,
         colors: {
-          primary: '#503118ff',
+          primary: '#503118',
           background: '#dddddd',
         },
       },
       dark: {
         dark: true,
         colors: {
-          primary: '#706055ff',
+          primary: '#706055',
           background: '#1c1c1c',
         },
       },

@@ -20,7 +20,7 @@
     <v-divider class="my-10" />
 
       <v-row class="mb-10 align-center">
-      <!-- ĽAVÝ TEXT -->
+      
       <v-col cols="12" md="3" class="text-right">
         <h3 class="d-flex align-center justify-end mb-3">
           Find your next read
@@ -34,7 +34,6 @@
         </p>
       </v-col>
 
-      <!-- OBRÁZOK -->
       <v-col cols="12" md="6">
         <v-img
           :src="readingCornerImage"
@@ -44,7 +43,6 @@
         />
       </v-col>
 
-      <!-- PRAVÝ TEXT -->
       <v-col cols="12" md="3">
         <h3 class="d-flex align-center mb-3">
           <v-icon class="ma-2">mdi-book-open-page-variant</v-icon>
@@ -89,7 +87,7 @@
 import { defineComponent } from "vue"
 import BookCard from "../components/BookCard.vue"
 import booksData from "../data/books.json"
-import type { Book } from "../types/books.ts"
+import type { Book } from "../types/booksTypes.ts"
 
 export default defineComponent({
   name: "HomeView",

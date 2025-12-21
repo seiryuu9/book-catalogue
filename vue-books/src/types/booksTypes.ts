@@ -2,6 +2,7 @@ export interface Review {
   user: string
   text: string
   rating: number
+  title?: string
 }
 
 export interface Book {
@@ -15,3 +16,5 @@ export interface Book {
   reviews: Review[]
   source: string
 }
+
+// struktura pre ts

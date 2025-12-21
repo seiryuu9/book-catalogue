@@ -5,8 +5,12 @@ import BookView from "../views/BooksView.vue";
 import AccountView from "../views/AccountView.vue";
 import BookDetailView from "../views/BookDetailView.vue";
 import BookDescription from "../components/BookDescription.vue";
+import NotFoundView from '../views/NotFoundView.vue'
 
-const routes = [
+
+import type { RouteRecordRaw } from 'vue-router' // typovanie pre routes
+
+const routes: RouteRecordRaw[] = [
   {
     path: "/",
     name: "home",
@@ -16,7 +20,7 @@ const routes = [
           path: "desc/:slug",
           name: "book-description",
           component: BookDescription,
-          props: true,
+          props: true, // properties, ktore dostane komponent zvonku, napr slug z URL
         },
       ],
   },
@@ -26,16 +30,22 @@ const routes = [
     component: BookView,
   },
   {
-  path: '/books/:slug',
-  name: 'book-detail',
-  component: BookDetailView,
-  props: true
+    path: '/books/:slug',
+    name: 'book-detail',
+    component: BookDetailView,
+    props: true 
   },
   {
     path: "/account",
     name: "account",
     component: AccountView,
   },
+  {
+    path: '/:pathMatch(.*)*', // zachyti vsetky neexistujuce cesty, musi byt na konci
+    name: 'not-found',
+    component: NotFoundView,
+  }
+
 ];
 
 const router = createRouter({
