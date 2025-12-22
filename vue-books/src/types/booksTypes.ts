@@ -17,4 +17,8 @@ export interface Book {
   source: string
 }
 
-// struktura pre ts
+export interface UserReview extends Review {
+  bookSlug: string
+}
+
+// struktury pre ts

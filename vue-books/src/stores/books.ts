@@ -46,12 +46,10 @@ export const useBooksStore = defineStore('books', {
 
     // filtruje sa podla obsahu, aby sa predislo chybam napr pri mazani, ked je zapnuty filter
       book.reviews = book.reviews.filter(r => 
-        !(r.user === reviewToRemove.user && 
-          r.text === reviewToRemove.text && 
-          r.rating === reviewToRemove.rating)
+        !(r.user === reviewToRemove.user)
       )
       
-    localStorage.setItem('books', JSON.stringify(this.books))
+    localStorage.setItem('books', JSON.stringify(this.books)) // localStorage berie len stringy
   }
 }
 })

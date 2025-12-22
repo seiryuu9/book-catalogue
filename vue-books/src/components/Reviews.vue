@@ -6,9 +6,10 @@
       label="Filter by rating" clearable class="mb-4" density="compact" />
 
     <v-card v-for="review in filteredReviews" :key="review.user + review.text + review.rating"
-      class="mb-3" variant="outlined">
+      class="mb-3" variant="outlined" 
+      @click="goToBook(review)" >
 
-      <v-btn v-if="auth.currentUser?.username === review.user" 
+      <v-btn v-if="!clickable && auth.currentUser?.username === review.user" 
         icon="mdi-delete" size="small" variant="text" color="error" class="float-right"
         @click="confirmDelete(review)" />
 
@@ -33,7 +34,7 @@
       No reviews found.
     </p>
 
-    <!-- Dialog na potvrdenie mazania -->
+    <!-- dialog na potvrdenie mazania -->
     <v-dialog v-model="dialog" max-width="400">
       <v-card>
 
@@ -57,21 +58,26 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import type { Review } from '../types/booksTypes'
+import type { UserReview, Review } from '../types/booksTypes'
 import { useAuthStore } from '../stores/auth'
 import { useBooksStore } from '../stores/books'
+import router from '../router'
 
 export default defineComponent({
-  name: 'ReviewList',
+  name: 'Reviews',
 
   props: {
     reviews: {
       type: Array as PropType<Review[]>,
       required: true,
     },
+    clickable: {
+      type: Boolean,
+      default: false,
+    },
     bookSlug: {
       type: String,
-      required: true,
+      required: false,
     },
   },
 
@@ -106,11 +112,20 @@ export default defineComponent({
     },
 
     deleteConfirmed() {
-      if (this.reviewToDelete) {
-        this.booksStore.deleteReview(this.bookSlug, this.reviewToDelete)
-        this.reviewToDelete = null
-      }
+      if (!this.bookSlug || !this.reviewToDelete) return
+
+      this.booksStore.deleteReview(this.bookSlug, this.reviewToDelete)
+      this.reviewToDelete = null
       this.dialog = false
+    },
+
+    goToBook(review: Review) {
+      if (!this.clickable) return
+
+      const r = review as UserReview
+      if (r.bookSlug) {
+        router.push(`/books/${r.bookSlug}`)
+      }
     },
   },
 })
