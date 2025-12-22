@@ -10,7 +10,7 @@ export const useAuthStore = defineStore('auth', {
   state: (): AuthState => {
     // nacita user z localStorage ak existuje
     const storedUser = localStorage.getItem('currentUser')
-    const user: User | null = storedUser ? JSON.parse(storedUser) : null 
+    const user: User | null = storedUser ? JSON.parse(storedUser) : null // ak existuje, premeni na objekt
 
     return {
       currentUser: user,
@@ -33,7 +33,7 @@ export const useAuthStore = defineStore('auth', {
         this.isLoggedIn = true
 
         // ulozi user do localStorage
-        localStorage.setItem('currentUser', JSON.stringify(demoUser))
+        localStorage.setItem('currentUser', JSON.stringify(demoUser)) // premeni na string
 
         return true
       }

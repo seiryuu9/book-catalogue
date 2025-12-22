@@ -1,8 +1,10 @@
 <template>
   <v-app-bar color="primary">
 
-    <v-app-bar-title to="/" class="font-weight-bold">
+    <v-app-bar-title class="font-weight-bold">
+      <router-link to="/" class="text-white text-decoration-none">
       BadReads
+      </router-link>
     </v-app-bar-title>
 
     <v-btn to="/" variant="text">
@@ -33,10 +35,10 @@ import { useThemeStore } from '../stores/theme'
 export default defineComponent({
   name: 'NavigationBar',
 
-  computed: {
-    themeStore() {
-      return useThemeStore()
-    },
+  data() {
+    return {
+      themeStore: useThemeStore(),
+    }
   },
 
   methods: {

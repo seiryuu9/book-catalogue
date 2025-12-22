@@ -9,15 +9,15 @@
   </v-card>
 </template>
 
-
 <script lang="ts">
-import { defineComponent } from "vue";
-import type { Book } from "../types/booksTypes";
-import books from "../data/books.json";
+import { defineComponent } from 'vue'
+import { useBooksStore } from '../stores/books'
+import type { Book } from '../types/booksTypes'
 
 export default defineComponent({
-  name: "BookDescription",
-    props: {
+  name: 'BookDescription',
+
+  props: {
     slug: {
       type: String,
       required: true,
@@ -25,11 +25,14 @@ export default defineComponent({
   },
 
   computed: {
-    book(): Book | undefined {
-      return (books as Book[]).find(
-        (b) => b.slug === this.slug
-      )
+    booksStore() {
+      return useBooksStore()
     },
-},
-});
+
+    book(): Book | undefined {
+      return this.booksStore.getBookBySlug(this.slug)
+    },
+  },
+})
 </script>
+

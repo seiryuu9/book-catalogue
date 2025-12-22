@@ -1,11 +1,12 @@
 <template>
-  <v-card class="cursor-pointer" elevation="3" hover>
+  <v-card class="cursor-pointer" elevation="3">
 
     <v-img :src="book.image" height="400" cover/>
 
     <v-card-title class="text-center">
       {{ book.title }}
     </v-card-title>
+
   </v-card>
 </template>
 
@@ -19,11 +20,9 @@ export default defineComponent({
 
   props: {
     book: {
-      type: Object as PropType<Book>,
+      type: Object as PropType<Book>, // ocakava, ze mu booksview posle konkretny book, proptype pre ts z types
       required: true,
     },
   },
 })
 </script>
-
-

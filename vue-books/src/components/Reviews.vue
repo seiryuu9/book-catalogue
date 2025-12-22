@@ -2,41 +2,23 @@
   <div>
     <h3 class="my-2">Reviews</h3>
 
-    <v-select
-      v-model="selectedRating"
-      :items="ratingOptions"
-      label="Filter by rating"
-      clearable
-      class="mb-4"
-      density="compact"
-    />
+    <v-select v-model="selectedRating" :items="ratingOptions"
+      label="Filter by rating" clearable class="mb-4" density="compact" />
 
-    <v-card
-      v-for="(review, index) in filteredReviews"
-      :key="index"
-      class="mb-3"
-      variant="outlined"
-    >
-      <v-btn
-        v-if="auth.currentUser?.username === review.user"
-        icon="mdi-delete"
-        size="small"
-        variant="text"
-        color="error"
-        class="float-right"
-        @click="confirmDelete(review)"
-      />
+    <v-card v-for="review in filteredReviews" :key="review.user + review.text + review.rating"
+      class="mb-3" variant="outlined">
+
+      <v-btn v-if="auth.currentUser?.username === review.user" 
+        icon="mdi-delete" size="small" variant="text" color="error" class="float-right"
+        @click="confirmDelete(review)" />
 
       <v-card-title class="text-subtitle-1 font-weight-bold">
         {{ review.user }}
       </v-card-title>
 
       <v-card-text>
-        <v-rating
-          :model-value="review.rating"
-          readonly
-          density="compact"
-        />
+        <v-rating :model-value="review.rating"
+          readonly density="compact" />
 
         <p class="text-caption text-grey">
           {{ review.title }}
@@ -44,6 +26,7 @@
 
         <p class="mt-2">{{ review.text }}</p>
       </v-card-text>
+
     </v-card>
 
     <p v-if="filteredReviews.length === 0">
@@ -53,17 +36,21 @@
     <!-- Dialog na potvrdenie mazania -->
     <v-dialog v-model="dialog" max-width="400">
       <v-card>
-        <v-card-title class="headline">Confirm Delete</v-card-title>
+
+        <v-card-title class="headline">Confirm delete</v-card-title>
         <v-card-text>
           Are you sure you want to delete this review?
         </v-card-text>
+
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn text color="primary" @click="dialog = false">Cancel</v-btn>
           <v-btn text color="error" @click="deleteConfirmed">Delete</v-btn>
         </v-card-actions>
+
       </v-card>
     </v-dialog>
+
   </div>
 </template>
 
@@ -71,8 +58,8 @@
 import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import type { Review } from '../types/booksTypes'
-import { useAuthStore } from '@/stores/auth'
-import { useBooksStore } from '@/stores/books'
+import { useAuthStore } from '../stores/auth'
+import { useBooksStore } from '../stores/books'
 
 export default defineComponent({
   name: 'ReviewList',
@@ -90,7 +77,7 @@ export default defineComponent({
 
   data() {
     return {
-      selectedRating: null as number | null, // znaaci, ze null moze byt neskor cislo
+      selectedRating: null as number | null, // znaci, ze null moze byt neskor cislo
       dialog: false,
       reviewToDelete: null as Review | null,
     }

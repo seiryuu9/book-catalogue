@@ -24,16 +24,15 @@
       <v-divider class="my-4"></v-divider>
 
       <v-row justify="center">
-        <span>&copy; {{ new Date().getFullYear() }} BadReads. All rights reserved. By Ema Radzová.</span>
+        <span>&copy; {{ year }} BadReads. All rights reserved. By Ema Radzová.</span>
       </v-row>
     </v-container>
   </v-footer>
 </template>
 
 <script setup lang="ts">
-// ?? nic
+  const year = new Date().getFullYear()
 </script>
-
 
 <style scoped>
 .footer-link {
