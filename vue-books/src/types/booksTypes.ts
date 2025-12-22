@@ -17,7 +17,7 @@ export interface Book {
   source: string
 }
 
-export interface UserReview extends Review {
+export interface UserReview extends Review { 
   bookSlug: string
 }
 

@@ -54,7 +54,7 @@ export default defineComponent({
 
     filteredBooks(): Book[] { // computed sa automaticky prepocita len pri zmeneni filtra, ma cache
       if (!this.selectedGenre) return this.books
-      return this.books.filter(book => book.genre.includes(this.selectedGenre))
+      return this.books.filter(book => book.genre.includes(this.selectedGenre as string))
     },
   },
 })
