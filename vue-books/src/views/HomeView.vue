@@ -3,7 +3,8 @@
     
     <v-row class="mb-6">
       <v-col cols="12" md="6">
-        <v-img :src="libraryImage" height="400px" class="rounded-lg" />
+        <v-img :src="libraryImage" alt="Library Image" 
+           height="400px" class="rounded-lg" />
       </v-col>
 
       <v-col cols="12" md="6" class="d-flex flex-column justify-center">
@@ -35,12 +36,8 @@
       </v-col>
 
       <v-col cols="12" md="6">
-        <v-img
-          :src="readingCornerImage"
-          height="500"
-          class="rounded-lg"
-          contain
-        />
+        <v-img :src="readingCornerImage" alt="Reading Corner Image"
+          height="500" class="rounded-lg" contain />
       </v-col>
 
       <v-col cols="12" md="3">
@@ -56,7 +53,6 @@
       </v-col>
     </v-row>
 
-
     <v-divider class="my-10" />
     <h2 class="mb-4">Our favourites</h2>
 
@@ -70,7 +66,7 @@
       </v-col>
     </v-row>
    
-    <router-view class="mt-8" />
+    <router-view class="mt-8" /> <!-- pre desc -->
 
     <v-row class="mt-4">
       <v-col class="text-center">
@@ -86,7 +82,7 @@
 <script lang="ts">
 import { defineComponent } from "vue"
 import BookCard from "../components/BookCard.vue"
-import booksData from "../data/books.json"
+import { useBooksStore } from "../stores/books"
 import type { Book } from "../types/booksTypes.ts"
 
 export default defineComponent({
@@ -100,24 +96,23 @@ export default defineComponent({
     return {
       libraryImage: "/images/library.jpg",
       readingCornerImage: "/images/corner.jpg",
-
-      books: booksData as Book[],
-      dialog: false,
-      selectedBook: null as Book | null,
     }
   },
 
   computed: {
+    booksStore() {
+      return useBooksStore()
+    },
+
     featuredBooks(): Book[] {
-      return this.books.slice(0, 3)
+      return this.booksStore.books.slice(0, 3)
     },
   },
 
   methods: {
-  goToBook(slug: string) {
-    this.$router.push(`/desc/${slug}`)
-  },
-}
-
+    goToBook(slug: string) {
+      this.$router.push(`/desc/${slug}`)
+    },
+  }
 })
 </script>
