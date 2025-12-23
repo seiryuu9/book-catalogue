@@ -24,14 +24,14 @@
     </v-row>
 
     <!-- profil po lognuti -->
+     
     <v-row justify="center" v-else>
       <v-col cols="12" md="8">
         <v-card>
           <v-card-text class="text-center">
             
             <v-avatar size="120" class="mb-4">
-              <v-img
-                :src="auth.currentUser?.avatar" cover />
+              <v-img :src="auth.currentUser?.avatar" cover />
             </v-avatar>
 
             <h2>{{ auth.currentUser?.username }}</h2>
@@ -41,12 +41,10 @@
             </p>
 
             <v-divider class="my-6" />
-       
-            <v-card-text class="text-left">
-              <Reviews :reviews="myReviews" 
-                :clickable="true" />
-            </v-card-text>
-
+          
+            <Reviews v-if="myReviews.length" :reviews="myReviews" 
+              :clickable="true" />
+     
             <v-divider class="my-6" />
 
             <v-btn color="red" variant="outlined" @click="auth.logout" >

@@ -32,13 +32,11 @@
 
         <v-divider class="my-6" />
 
-        <Reviews :reviews="book.reviews" 
-        :book-slug="book.slug" />
+        <Reviews />
 
         <v-divider class="my-6" />
 
-        <AddReview :book-slug="book.slug"
-          :book-title="book.title" />
+        <AddReview />
 
       </v-col>
     </v-row>
@@ -46,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, provide } from 'vue'
 import { useBooksStore } from '../stores/books'
 import Reviews from '../components/Reviews.vue'
 import AddReview from '../components/AddReview.vue'
@@ -75,6 +73,27 @@ export default defineComponent({
     book(): Book | undefined {
       return this.booksStore.getBookBySlug(this.slug)
     },
+  },
+
+  // v rodicovi pouzivam provide na poslanie dat do deti
+  watch: {
+    book: { // vzdy ked sa zmeni hodnota book, zavola sa handler
+      immediate: true, // spusti sa aj pri vytvoreni komponentu
+      handler(newBook) {
+        // provide po tom, ako book existuje
+        if (newBook) {
+          provide('book', newBook)
+          provide('bookSlug', newBook.slug)
+        }
+      },
+    },
+    '$route.params.slug': { // sleduje zmeny parametra slug v route
+        immediate: true,
+        handler(newSlug) {
+          // refresh dat pri zmene slug
+          this.booksStore.getBookBySlug(newSlug)
+    }
+  }
   },
 })
 </script>

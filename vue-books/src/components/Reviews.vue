@@ -56,8 +56,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import type { PropType } from 'vue'
+import { defineComponent, inject, type PropType } from 'vue'
 import type { UserReview, Review } from '../types/booksTypes'
 import { useAuthStore } from '../stores/auth'
 import { useBooksStore } from '../stores/books'
@@ -67,17 +66,13 @@ export default defineComponent({
   name: 'Reviews',
 
   props: {
-    reviews: {
-      type: Array as PropType<Review[]>,
-      required: true,
-    },
     clickable: {
       type: Boolean,
       default: false,
     },
-    bookSlug: {
-      type: String,
-      required: false,
+    reviews: {
+      type: Array as PropType<Review[]>,
+      default: () => [],
     },
   },
 
@@ -86,6 +81,8 @@ export default defineComponent({
       selectedRating: null as number | null, // znaci, ze null moze byt neskor cislo
       dialog: false,
       reviewToDelete: null as Review | null,
+      injectedBook: inject('book', null) as { reviews: Review[] } | null, // ziskam book z rodica
+      injectedBookSlug: inject('bookSlug', '') as string | null,
     }
   },
 
@@ -100,8 +97,10 @@ export default defineComponent({
       return [5, 4, 3, 2, 1]
     },
     filteredReviews(): Review[] {
-      if (!this.selectedRating) return this.reviews
-      return this.reviews.filter(r => r.rating === this.selectedRating)
+      const reviewsSource = this.reviews.length ? this.reviews : this.injectedBook?.reviews ?? []
+      if (!reviewsSource) return []
+      if (!this.selectedRating) return reviewsSource
+      return reviewsSource.filter(r => r.rating === this.selectedRating)
     },
   },
 
@@ -112,9 +111,9 @@ export default defineComponent({
     },
 
     deleteConfirmed() {
-      if (!this.bookSlug || !this.reviewToDelete) return
+      if (!this.injectedBookSlug || !this.reviewToDelete) return
 
-      this.booksStore.deleteReview(this.bookSlug, this.reviewToDelete)
+      this.booksStore.deleteReview(this.injectedBookSlug, this.reviewToDelete)
       this.reviewToDelete = null
       this.dialog = false
     },
@@ -124,7 +123,7 @@ export default defineComponent({
 
       const r = review as UserReview
       if (r.bookSlug) {
-        router.push(`/books/${r.bookSlug}`)
+        router.push({ name: 'book-detail', params: { slug: r.bookSlug } }) // dostanem books/:slug, inak by ma nehodilo na detail knihy, len zmenilo URL
       }
     },
   },

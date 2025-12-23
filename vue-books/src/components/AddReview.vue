@@ -27,23 +27,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, inject } from 'vue' // inject je vlastne namiesto props
 import { useAuthStore } from '../stores/auth'
 import { useBooksStore } from '../stores/books'
 
 export default defineComponent({
   name: 'AddReview',
 
-  props: {
-    bookSlug: { type: String, required: true },
-    bookTitle: { type: String, required: true },
-  },
-
   data() {
     return {
       rating: 0,
       text: '',
       dialog: false as boolean, 
+      injectedBookSlug: '' as string,
+      injectedBookTitle: '' as string,
     }
   },
 
@@ -56,12 +53,18 @@ export default defineComponent({
     },
   },
 
+  created(){
+    this.injectedBookSlug = inject('bookSlug', '')
+    const book = inject('book', { title: '' })
+    this.injectedBookTitle = book.title
+  },
+
   methods: {
     submitReview() {
       if (!this.auth.currentUser) return
 
-      const success = this.booksStore.addReview(this.bookSlug, {
-        title: this.bookTitle,
+      const success = this.booksStore.addReview(this.injectedBookSlug, {
+        title: this.injectedBookTitle,
         user: this.auth.currentUser.username,
         rating: this.rating,
         text: this.text,
