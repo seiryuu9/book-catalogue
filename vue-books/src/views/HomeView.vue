@@ -94,8 +94,8 @@ export default defineComponent({
 
   data() {
     return {
-      libraryImage: "/images/library.jpg",
-      readingCornerImage: "/images/corner.jpg",
+      libraryImage: "../images/library.jpg",
+      readingCornerImage: "../images/corner.jpg",
     }
   },
 

@@ -8,7 +8,7 @@ import vuetify from 'vite-plugin-vuetify'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/book-catalogue/',
+  base: '/',
   plugins: [
     vue(),
     vueDevTools(),

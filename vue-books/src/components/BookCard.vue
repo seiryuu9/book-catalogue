@@ -1,7 +1,7 @@
 <template>
   <v-card class="cursor-pointer" elevation="3">
 
-    <v-img :src="book.image" height="400" cover/>
+    <v-img :src="`/${book.image}`" height="400" cover/>
 
     <v-card-title class="text-center">
       {{ book.title }}
