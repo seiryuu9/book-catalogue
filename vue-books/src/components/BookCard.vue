@@ -1,7 +1,7 @@
 <template>
   <v-card class="cursor-pointer" elevation="3">
 
-    <v-img :src="`${import.meta.env.BASE_URL}${book.image}`" height="400" cover/>
+    <v-img :src="imageSrc" height="400" cover/>
 
     <v-card-title class="text-center">
       {{ book.title }}
@@ -22,6 +22,12 @@ export default defineComponent({
     book: {
       type: Object as PropType<Book>, // ocakava, ze mu booksview posle konkretny book, proptype pre ts z types
       required: true,
+    },
+  },
+  computed: {
+    imageSrc(): string {
+      // BASE_URL + relativna cesta z jsonu
+      return `${import.meta.env.BASE_URL}${this.book.image}`
     },
   },
 })

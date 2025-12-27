@@ -7,7 +7,7 @@
   <v-container v-if="book">
     <v-row>
       <v-col cols="12" md="4">
-        <v-img :src="`${import.meta.env.BASE_URL}${book.image}`" />
+        <v-img :src="imageSrc" />
       </v-col>
 
       <v-col cols="12" md="8">
@@ -72,6 +72,10 @@ export default defineComponent({
 
     book(): Book | undefined {
       return this.booksStore.getBookBySlug(this.slug)
+    },
+
+     imageSrc(): string {
+      return this.book ? `${import.meta.env.BASE_URL}${this.book.image}` : ''
     },
   },
 
