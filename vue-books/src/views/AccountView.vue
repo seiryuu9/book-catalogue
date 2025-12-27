@@ -44,6 +44,9 @@
           
             <Reviews v-if="myReviews.length" :reviews="myReviews" 
               :clickable="true" />
+            <p v-else>
+              You have not written any reviews yet.
+            </p>
      
             <v-divider class="my-6" />
 

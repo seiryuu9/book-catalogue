@@ -31,8 +31,8 @@
 
       </v-card>
     </div>
-    <div v-else>
-      <p v-if="filteredReviews.length === 0">
+    <div v-else class="text-center my-4">
+      <p>
         No reviews found.
       </p>
     </div>
