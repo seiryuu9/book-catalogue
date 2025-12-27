@@ -5,34 +5,37 @@
     <v-select v-model="selectedRating" :items="ratingOptions"
       label="Filter by rating" clearable class="mb-4" density="compact" />
 
-    <v-card v-for="review in filteredReviews" :key="review.user + review.text + review.rating"
-      class="mb-3" variant="outlined" 
-      @click="goToBook(review)" >
+    <div v-if="filteredReviews.length">
+      <v-card v-for="review in filteredReviews" :key="review.user + review.text + review.rating"
+        class="mb-3" variant="outlined" 
+        @click="goToBook(review)" >
 
-      <v-btn v-if="!clickable && auth.currentUser?.username === review.user" 
-        icon="mdi-delete" size="small" variant="text" color="error" class="float-right"
-        @click="confirmDelete(review)" />
+        <v-btn v-if="!clickable && auth.currentUser?.username === review.user" 
+          icon="mdi-delete" size="small" variant="text" color="error" class="float-right"
+          @click="confirmDelete(review)" />
 
-      <v-card-title class="text-subtitle-1 font-weight-bold">
-        {{ review.user }}
-      </v-card-title>
+        <v-card-title class="text-subtitle-1 font-weight-bold">
+          {{ review.user }}
+        </v-card-title>
 
-      <v-card-text>
-        <v-rating :model-value="review.rating"
-          readonly density="compact" />
+        <v-card-text>
+          <v-rating :model-value="review.rating"
+            readonly density="compact" />
 
-        <p class="text-caption text-grey">
-          {{ review.title }}
-        </p>
+          <p class="text-caption text-grey">
+            {{ review.title }}
+          </p>
 
-        <p class="mt-2">{{ review.text }}</p>
-      </v-card-text>
+          <p class="mt-2">{{ review.text }}</p>
+        </v-card-text>
 
-    </v-card>
-
-    <p v-if="filteredReviews.length === 0">
-      No reviews found.
-    </p>
+      </v-card>
+    </div>
+    <div v-else>
+      <p v-if="filteredReviews.length === 0">
+        No reviews found.
+      </p>
+    </div>
 
     <!-- dialog na potvrdenie mazania -->
     <v-dialog v-model="dialog" max-width="400">

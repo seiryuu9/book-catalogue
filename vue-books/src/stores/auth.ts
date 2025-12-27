@@ -24,7 +24,7 @@ export const useAuthStore = defineStore('auth', {
       const demoUser: User = {
         username: 'demo',
         password: 'demo',
-        avatar: '/images/cat.jpg',
+        avatar: 'images/cat.jpg',
         bio: 'I love reading and books and words and and and',
       }
 

@@ -31,7 +31,7 @@
           <v-card-text class="text-center">
             
             <v-avatar size="120" class="mb-4">
-              <v-img :src="auth.currentUser?.avatar" cover />
+              <v-img :src="avatarSrc" cover />
             </v-avatar>
 
             <h2>{{ auth.currentUser?.username }}</h2>
@@ -99,7 +99,14 @@ export default defineComponent({
           .filter(r => r.user === currentUsername)
           .map(r => ({ ...r, bookSlug: book.slug }))
       )
-    }
+    },
+
+    avatarSrc(): string {
+      // ak currentUser existuje, pripoj BASE_URL k jeho avatar ceste
+      return this.auth.currentUser?.avatar
+        ? `${import.meta.env.BASE_URL}${this.auth.currentUser.avatar}`
+        : ''
+    },
   },
 
   methods: {
