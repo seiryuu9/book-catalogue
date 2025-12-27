@@ -93,10 +93,11 @@ export default defineComponent({
   },
 
   data() {
-    return {
-      libraryImage: "../images/library.jpg",
-      readingCornerImage: "../images/corner.jpg",
-    }
+      const base = import.meta.env.BASE_URL
+      return {
+        libraryImage: `${base}images/library.jpg`,
+        readingCornerImage: `${base}images/corner.jpg`,
+      }
   },
 
   computed: {

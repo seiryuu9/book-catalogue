@@ -7,7 +7,7 @@
   <v-container v-if="book">
     <v-row>
       <v-col cols="12" md="4">
-        <v-img :src="`/${book.image}`" />
+        <v-img :src="`${import.meta.env.BASE_URL}${book.image}`" />
       </v-col>
 
       <v-col cols="12" md="8">
