@@ -93,7 +93,7 @@ export default defineComponent({
   },
 
   data() {
-      const base = import.meta.env.BASE_URL
+      const base = import.meta.env.BASE_URL // dynamicka cesta k zakladnej url, zalezi od prostredia, kde spustam stranku
       return {
         libraryImage: `${base}images/library.jpg`,
         readingCornerImage: `${base}images/corner.jpg`,

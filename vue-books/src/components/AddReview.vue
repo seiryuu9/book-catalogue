@@ -53,7 +53,7 @@ export default defineComponent({
     },
   },
 
-  created(){
+  created(){ // spusti sa pri vytvoreni komponentu
     this.injectedBookSlug = inject('bookSlug', '')
     const book = inject('book', { title: '' })
     this.injectedBookTitle = book.title

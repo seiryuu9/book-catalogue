@@ -2,9 +2,9 @@ import { defineStore } from 'pinia'
 import booksData from '../data/books.json'
 import type { Book, Review } from '../types/booksTypes.ts'
 
-export const useBooksStore = defineStore('books', {
+export const useBooksStore = defineStore('books', { // books je nazov store
   state: () => {
-    const stored = localStorage.getItem('books')
+    const stored = localStorage.getItem('books') // skusi nacitat data z localStorage
 
     const sourceBooks: Book[] = stored ? JSON.parse(stored) as Book[] : structuredClone(booksData)
 
@@ -21,7 +21,7 @@ export const useBooksStore = defineStore('books', {
 
     reviewsByUser: (state) => {
       return (username: string): Review[] =>
-        state.books.flatMap(book =>
+        state.books.flatMap(book => // z kazdeho book berie len review
           book.reviews.filter(r => r.user === username)
         )
     },
@@ -29,24 +29,23 @@ export const useBooksStore = defineStore('books', {
 
   actions: {
     addReview(slug: string, review: Review): boolean {
-    const book = this.books.find(b => b.slug === slug)
-    if (!book) return false
+      const book = this.books.find(b => b.slug === slug)
+      if (!book) return false
 
-    const exists = book.reviews.some(r => r.user === review.user)
-    if (exists) return false // vracia false, aby vyskocil dialog v komponentne
+      const exists = book.reviews.some(r => r.user === review.user)
+      if (exists) return false // vracia false, aby vyskocil dialog v komponentne, ak user uz recenziu pridal
 
-    book.reviews.push(review)
-    localStorage.setItem('books', JSON.stringify(this.books))
-    return true
-  },
+      book.reviews.push(review)
+      localStorage.setItem('books', JSON.stringify(this.books)) // aktualizuje localStorage
+      return true
+    },
 
     deleteReview(slug: string, reviewToRemove: Review) {
       const book = this.books.find(b => b.slug === slug)
       if (!book) return
 
-    // filtruje sa podla obsahu, aby sa predislo chybam napr pri mazani, ked je zapnuty filter
       book.reviews = book.reviews.filter(r => 
-        !(r.user === reviewToRemove.user)
+        !(r.user === reviewToRemove.user) // review nema id, tak porovnavame podla usera - nove pole
       )
       
     localStorage.setItem('books', JSON.stringify(this.books)) // localStorage berie len stringy

@@ -4,6 +4,8 @@
     Back
   </v-btn>
 
+  <NotFoundView v-if="!book" />
+  
   <v-container v-if="book">
     <v-row>
       <v-col cols="12" md="4">
@@ -49,6 +51,7 @@ import { useBooksStore } from '../stores/books'
 import Reviews from '../components/Reviews.vue'
 import AddReview from '../components/AddReview.vue'
 import type { Book } from '../types/booksTypes'
+import NotFoundView from './NotFoundView.vue'
 
 export default defineComponent({
   name: 'BookDetailView',
@@ -56,6 +59,7 @@ export default defineComponent({
   components: {
     Reviews,
     AddReview,
+    NotFoundView,
   },
 
   props: {
@@ -91,13 +95,6 @@ export default defineComponent({
         }
       },
     },
-    '$route.params.slug': { // sleduje zmeny parametra slug v route
-        immediate: true,
-        handler(newSlug) {
-          // refresh dat pri zmene slug
-          this.booksStore.getBookBySlug(newSlug)
-    }
-  }
   },
 })
 </script>

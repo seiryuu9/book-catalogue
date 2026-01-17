@@ -100,7 +100,7 @@ export default defineComponent({
       return this.booksStore.books.flatMap((book: Book) =>
         book.reviews
           .filter(r => r.user === currentUsername)
-          .map(r => ({ ...r, bookSlug: book.slug }))
+          .map(r => ({ ...r, bookSlug: book.slug })) // ...r rozbali vlastnosti recenzie - user, rating, text atd a prida bookslug
       )
     },
 
